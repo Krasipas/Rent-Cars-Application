@@ -15,8 +15,8 @@ public class Category {
     @NotNull
     private String name;
 
-    @OneToOne(mappedBy = "categories")
-    private User user;
+    @OneToOne(mappedBy = "category")
+    private Car car;
 
     public Category() {
     }
@@ -33,11 +33,11 @@ public class Category {
         this.name = name;
     }
 
-    public User getUser() {
-        return user;
+    public Car getCar() {
+        return car;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCar(Car car) {
+        this.car = car;
     }
 }
