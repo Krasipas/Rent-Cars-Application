@@ -1,5 +1,6 @@
 package com.RentCars.RentCars.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -27,23 +28,18 @@ public class User {
     @Column(name = "isManager")
     private boolean isManager;
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_cars",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "car_id")
-    )
-    private Set<Car> userCars;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<UserCar> userCars;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, City city, boolean isManager, Set<Car> userCars) {
+    public User(String firstName, String lastName, City city, boolean isManager) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;
         this.isManager = isManager;
-        this.userCars = userCars;
     }
 
     public String getFirstName() {
@@ -78,11 +74,11 @@ public class User {
         isManager = manager;
     }
 
-    public Set<Car> getUserCars() {
+    public Set<UserCar> getUserCars() {
         return userCars;
     }
 
-    public void setUserCars(Set<Car> userCars) {
+    public void setUserCars(Set<UserCar> userCars) {
         this.userCars = userCars;
     }
 }
