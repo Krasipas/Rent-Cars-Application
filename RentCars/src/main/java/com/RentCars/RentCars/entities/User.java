@@ -42,6 +42,10 @@ public class User {
         this.isManager = isManager;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getFirstName() {
         return firstName;
     }

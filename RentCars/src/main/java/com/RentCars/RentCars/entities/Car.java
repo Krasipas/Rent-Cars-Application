@@ -39,6 +39,10 @@ public class Car {
     public Car() {
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getBrand() {
         return brand;
     }

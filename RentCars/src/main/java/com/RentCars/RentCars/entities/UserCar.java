@@ -30,6 +30,10 @@ public class UserCar {
         this.car = car;
     }
 
+    public UserCarKey getId() {
+        return id;
+    }
+
     public User getUser() {
         return user;
     }
