@@ -1,8 +1,10 @@
 package com.RentCars.RentCars.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "categories")
@@ -15,8 +17,9 @@ public class Category {
     @NotNull
     private String name;
 
-    @OneToOne(mappedBy = "category")
-    private Car car;
+    @JsonIgnore
+    @OneToMany(mappedBy = "category")
+    private Set<Car> car;
 
     public Category() {
     }
@@ -33,11 +36,11 @@ public class Category {
         this.name = name;
     }
 
-    public Car getCar() {
+    public Set<Car> getCar() {
         return car;
     }
 
-    public void setCar(Car car) {
+    public void setCar(Set<Car> car) {
         this.car = car;
     }
 }

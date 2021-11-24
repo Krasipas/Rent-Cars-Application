@@ -3,6 +3,7 @@ package com.RentCars.RentCars.entities;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "cars")
@@ -19,9 +20,12 @@ public class Car {
     @NotNull
     private String model;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
+
+    @ManyToMany(mappedBy = "userCars")
+    Set<User> carUsers;
 
     public Car(String brand, String model, Category category) {
         this.brand = brand;
