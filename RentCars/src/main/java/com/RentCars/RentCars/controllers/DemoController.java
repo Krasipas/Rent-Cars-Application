@@ -27,6 +27,7 @@ public class DemoController {
         this.userCarRepo = userCarRepo;
     }
 
+    /*
     @GetMapping("show/user/cars")
     public List<Car> showUserCar(String firstName, String lastName){
         User selectedUser = userRepo.findByFirstNameAndLastName(firstName,lastName);
@@ -47,4 +48,5 @@ public class DemoController {
 
         return userCarRepo.save(userCarToSave);
     }
+     */
 }
