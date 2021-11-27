@@ -27,10 +27,11 @@ public class DemoController {
         this.userCarRepo = userCarRepo;
     }
 
-    /*
+/*
     @GetMapping("show/user/cars")
     public List<Car> showUserCar(String firstName, String lastName){
-        User selectedUser = userRepo.findByFirstNameAndLastName(firstName,lastName);
+        List<User> selectedUser = userRepo.findByFirstNameAndLastName(firstName,lastName);
+
         List<Car> result = new ArrayList<>();
 
         for(UserCar userCar:selectedUser.getUserCars()){
@@ -39,6 +40,7 @@ public class DemoController {
 
         return result;
     }
+
 
     @PostMapping("add/user/car")
     public UserCar addCarToUser(String firstName, String lastName, String carBrand, String carModel){
