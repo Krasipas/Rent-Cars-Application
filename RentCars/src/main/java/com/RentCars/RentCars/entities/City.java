@@ -1,6 +1,7 @@
 package com.RentCars.RentCars.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -15,7 +16,7 @@ public class City {
 
     private String name;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "city")
     private Set<User> clients;
 
