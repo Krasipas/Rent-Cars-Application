@@ -14,7 +14,7 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     @Query("SELECT c " +
             "FROM Car c " +
             "WHERE " +
-            "c.brand = :brand AND c.mode = :model"
+            "c.brand = :brand AND c.model = :model"
     )
     List<Car> findByBrandAndModel(String brand, String model);
 
