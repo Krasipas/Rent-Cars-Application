@@ -51,6 +51,10 @@ public class Car {
         return id;
     }
 
+    public String getBrandAndModel(){
+        return brand + ", " + model;
+    }
+
     public Brand getBrand() {
         return brand;
     }
