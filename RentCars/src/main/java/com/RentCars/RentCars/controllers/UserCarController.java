@@ -5,10 +5,8 @@ import com.RentCars.RentCars.payload.response.RentResponse;
 import com.RentCars.RentCars.repositories.CarRepository;
 import com.RentCars.RentCars.repositories.UserCarRepository;
 import com.RentCars.RentCars.repositories.UserRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,5 +39,11 @@ public class UserCarController {
             rentResponseList.add(rentResponse);
         }
         return rentResponseList;
+    }
+
+    @PostMapping("/rent/car")
+    public ResponseEntity<?> rentCar(String brand, String model, String personEGN){
+        return ResponseEntity.ok("OK");
+        // TODO: finish method
     }
 }
