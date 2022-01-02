@@ -1,6 +1,8 @@
 package com.RentCars.RentCars.controllers;
 
+import com.RentCars.RentCars.entities.User;
 import com.RentCars.RentCars.entities.UserCar;
+import com.RentCars.RentCars.payload.request.RentRequest;
 import com.RentCars.RentCars.payload.response.RentResponse;
 import com.RentCars.RentCars.repositories.CarRepository;
 import com.RentCars.RentCars.repositories.UserCarRepository;
@@ -8,6 +10,7 @@ import com.RentCars.RentCars.repositories.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,9 +44,15 @@ public class UserCarController {
         return rentResponseList;
     }
 
-    @PostMapping("/rent/car")
-    public ResponseEntity<?> rentCar(String brand, String model, String personEGN){
-        return ResponseEntity.ok("OK");
-        // TODO: finish method
+    @PostMapping("/car")
+    public ResponseEntity<?> rentCar(@RequestBody RentRequest rentRequest){
+        User user = userRepo.findUserByNum(rentRequest.getUserNum());
+        userCarRepo.save(new UserCar(
+            user,
+            rentRequest.getCar(),
+            new Timestamp(System.currentTimeMillis()),
+            rentRequest.getFinishDate()));
+        return ResponseEntity.ok("New rent added!");
+
     }
 }

@@ -1,7 +1,7 @@
 package com.RentCars.RentCars.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -22,6 +22,10 @@ public class User {
     @Column(name = "last_name")
     @NotNull
     private String lastName;
+
+    @Column(name = "num")
+    @NotNull
+    private Integer num;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
@@ -46,9 +50,10 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, City city, boolean isManager, Date birthDate) {
+    public User(String firstName, String lastName, Integer num, City city, boolean isManager, Date birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.num = num;
         this.city = city;
         this.isManager = isManager;
         this.birthDate = birthDate;
@@ -76,6 +81,14 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
     }
 
     public City getCity() {

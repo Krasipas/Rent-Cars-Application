@@ -2,6 +2,7 @@ package com.RentCars.RentCars.controllers;
 
 import com.RentCars.RentCars.entities.User;
 import com.RentCars.RentCars.payload.request.UserRequest;
+import com.RentCars.RentCars.payload.response.UserResponse;
 import com.RentCars.RentCars.repositories.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,19 +26,23 @@ public class UserController {
     }
 
     @GetMapping("/fetch")
-    public List<User> getAllUsers(){
-        List<User> result = userRepo.findAll();
-        return result;
+    public List<UserResponse> getAllUsers(){
+        List<User> users = userRepo.findAll();
+        //return result;
+        List<UserResponse> result = new ArrayList<>();
 
-        /*List<UserResponse> result = new ArrayList<>();
+        for(User user: users){
+          UserResponse userResponse = new UserResponse();
+          userResponse.setFirstName(user.getFirstName());
+          userResponse.setLastName(user.getLastName());
+          userResponse.setNum(user.getNum());
+          userResponse.setCity(user.getCity().getName());
+          userResponse.setDateBirth(user.getBirthDate());
+          userResponse.setManager(user.isManager());
 
-        for(User user: userRepo.findAll()){
-            result.add(new UserResponse(){
-
-            });
+          result.add(userResponse);
         }
-
-        return result;*/
+        return result;
     }
 
     @GetMapping("/pages")
@@ -68,24 +74,29 @@ public class UserController {
         for(User user: result){
             userRepo.delete(user);
         }
-        return fName + lName + "deleted!";
+        return fName + " " + lName + " deleted!";
     }
 
     @PostMapping("/save")
     public ResponseEntity<?> persistUser(@RequestBody UserRequest userRequest){
         List<User> users = userRepo.findByFirstNameAndLastName(userRequest.getFirstName(), userRequest.getLastName());
         if(users.isEmpty()) {
-            for (User user : users) {
-                user.setCity(userRequest.getCity());
-                user.setBirthDate(userRequest.getBirthDate());
-                user.setManager(userRequest.isManager());
-                return ResponseEntity.ok("User" + user + "is added!");
-            }
+            userRepo.save(new User(
+                    userRequest.getFirstName(),
+                    userRequest.getLastName(),
+                    userRequest.getNum(),
+                    userRequest.getCity(),
+                    userRequest.isManager(),
+                    userRequest.getBirthDate()));
+            return ResponseEntity.ok("User is added!");
         }
-        return ResponseEntity.ok("User" + userRepo.save(new User(userRequest.getFirstName(),
-                                                                 userRequest.getLastName(),
-                                                                 userRequest.getCity(),
-                                                                 userRequest.isManager(),
-                                                                 userRequest.getBirthDate())) + "is saved!");
+        for(User user: users){
+            user.setNum(userRequest.getNum());
+            user.setCity(userRequest.getCity());
+            user.setBirthDate(userRequest.getBirthDate());
+            user.setManager(userRequest.isManager());
+            userRepo.save(user);
+        }
+        return ResponseEntity.ok("User is saved!");
     }
 }
