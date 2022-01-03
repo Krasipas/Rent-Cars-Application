@@ -23,9 +23,13 @@ public class User {
     @NotNull
     private String lastName;
 
-    @Column(name = "num")
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Column(name = "num", length = 10)
     @NotNull
-    private Integer num;
+    private String num;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
@@ -50,13 +54,21 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, Integer num, City city, boolean isManager, Date birthDate) {
+    public User(String firstName, String lastName, String num, City city, boolean isManager, Date birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.num = num;
         this.city = city;
         this.isManager = isManager;
         this.birthDate = birthDate;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
     }
 
     public Long getId() {
@@ -81,14 +93,6 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Integer getNum() {
-        return num;
-    }
-
-    public void setNum(Integer num) {
-        this.num = num;
     }
 
     public City getCity() {
