@@ -1,0 +1,60 @@
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Home</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+
+      <body>
+          
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="/">Rent cars</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+              <li class="nav-item">
+                <a class="nav-link" href="/cars">Cars</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/cities">Cities</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/">Users</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/userCars">User cars</a>
+              </li>
+        </nav>
+
+        <div id="main-body">
+            <div class="container-md">
+                <div class="main_content_inner">
+
+                    Add user
+
+                    <form class="form-inline my-2 my-lg-0" action="http://localhost:8080/car/save" method="post">
+                        
+                        <input class="form-control mr-sm-2" type="text" name="brand" placeholder="Brand">
+                        <input class="form-control mr-sm-2" type="text" name="model" placeholder="Model">
+                        <input class="form-control mr-sm-2" type="text" name="fuel" placeholder="Fuel">
+                        <input class="form-control mr-sm-2" type="text" name="dateManufactured" placeholder="Date Manufactured">
+                        <input class="form-control mr-sm-2" type="text" name="registrationNum" placeholder="Registration Number">
+
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add</button>
+                    </form>
+
+                </div>
+            </div> 
+        </div>
+    </body>
+</html>

@@ -1,0 +1,131 @@
+#main-body {
+    display: block;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+}
+
+.container, .container-md, .container-sm {
+    max-width: 1200px;
+}
+
+#main-body .page-content {
+    display: block;
+    padding: 1rem 0;
+}
+
+body {
+    background-color: #ffffff;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: normal;
+    font-family: 'San Francisco', sans-serif;
+    color: #000000;
+}
+
+.container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.main_box_inner {
+    float: left;
+    width: 100%;
+    min-height: 310px;
+    position: relative;
+    padding-bottom: 100px;
+
+    padding: 5px 5px;
+    background-color: rgb(197, 196, 196);
+}
+
+.main_box_inner_active{
+    float: left;
+    width: 100%;
+    min-height: 310px;
+    position: relative;
+    padding-bottom: 100px;
+
+    padding: 5px 5px;
+    background-color: rgb(118, 176, 230);
+}
+
+.main_box {
+    float: left;
+    width: 25%;
+    padding: 5px 5px;
+    margin-bottom: 30px;
+}
+
+.main_box_img {
+    float: left;
+    width: 100%;
+    max-height: 166px;
+    overflow: hidden;
+}
+
+.main_box_img img {
+    float: left;
+    width: 100%;
+}
+
+img {
+    vertical-align: middle;
+}
+
+.main_content_inner {
+    float: left;
+    width: 100%;
+    min-height: 500px;
+}
+
+div {
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: #444;
+}
+
+.main_box_tags {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #e8e8e8;
+    height: 25px;
+    overflow: hidden;
+}
+
+.main_box_tags a {
+    color: #e8e8e8;
+    padding: 4px 5px;
+    background-color: #252525;
+    margin-bottom: 5px;
+    display: inline-block;
+    line-height: 1.0;
+}
+
+.main_box_title {
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+    color: #e8e8e8;
+    line-height: 1.2;
+    font-size: 15px;
+    height: 36px;
+    overflow-y: hidden;
+}
+.main_box_title a {
+    color: #e8e8e8;
+}
+
+a {
+    text-decoration: none;
+    color: #444;
+}
