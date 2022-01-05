@@ -1,5 +1,6 @@
 package com.RentCars.RentCars.controllers;
 
+import com.RentCars.RentCars.entities.Car;
 import com.RentCars.RentCars.entities.User;
 import com.RentCars.RentCars.entities.UserCar;
 import com.RentCars.RentCars.payload.request.RentRequest;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -45,15 +48,47 @@ public class UserCarController {
         return rentResponseList;
     }
 
-    @PostMapping("/car")
+    @PostMapping("/rent")
     public ResponseEntity<?> rentCar(@RequestBody RentRequest rentRequest){
         User user = userRepo.findUserByNum(rentRequest.getUserNum());
-        userCarRepo.save(new UserCar(
-            user,
-            rentRequest.getCar(),
-            new Timestamp(System.currentTimeMillis()),
-            rentRequest.getFinishDate()));
-        return ResponseEntity.ok("New rent added!");
+        Car selectedCar = carRepo.findByRegistrationNum(rentRequest.getCarNum());
+        Calendar calendar = Calendar.getInstance();
+
+        if(user == null){
+            return ResponseEntity.ok(user.getFullName() + " is not registered!");
+        }
+
+        if(selectedCar == null){
+            return ResponseEntity.ok(
+                    "Car with registration number " +
+                    selectedCar.getRegistrationNum() +
+                    " is not registered!");
+        }
+
+        if(UserCarService.CheckIfCarIsBeingUsed(userCarRepo, selectedCar)){
+            return ResponseEntity.ok("Selected car is being used and cannot be rented!");
+        }
+
+        Date startDate = calendar.getTime();
+        calendar.add(Calendar.DAY_OF_MONTH, rentRequest.getDaysToBeUsed());
+        Date finishDate = calendar.getTime();
+
+        UserCar savedUserCar = userCarRepo.save(new UserCar(
+                user,
+                selectedCar,
+                startDate,
+                finishDate
+        ));
+
+        return ResponseEntity.ok(
+                        "User " +
+                        savedUserCar.getUser().getFullName() +
+                        " rented" + savedUserCar.getCar().getBrandAndModel() +
+                        " with registration number " + savedUserCar.getCar().getRegistrationNum() +
+                        " for" + rentRequest.getDaysToBeUsed() +
+                        "!" +
+                        " Expire date: " +
+                        savedUserCar.getFinishDate());
 
     }
 
