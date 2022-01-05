@@ -7,6 +7,7 @@ import com.RentCars.RentCars.payload.response.RentResponse;
 import com.RentCars.RentCars.repositories.CarRepository;
 import com.RentCars.RentCars.repositories.UserCarRepository;
 import com.RentCars.RentCars.repositories.UserRepository;
+import com.RentCars.RentCars.service.UserCarService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,5 +55,27 @@ public class UserCarController {
             rentRequest.getFinishDate()));
         return ResponseEntity.ok("New rent added!");
 
+    }
+
+    @DeleteMapping("delete/unused")
+    public ResponseEntity<?> deleteUnusedCars(){
+        List<UserCar> usersCars = userCarRepo.findAll();
+        StringBuilder sb = new StringBuilder();
+
+        for(UserCar userCar: usersCars){
+            boolean isCarBeingUsed = UserCarService.CheckIfCarIsBeingUsed(userCarRepo,userCar.getCar());
+
+            if(isCarBeingUsed){
+                sb.append("Car with registration number " +
+                        userCar.getCar().getRegistrationNum() +
+                        " is being used by " + userCar.getUser().getFullName());
+                continue;
+            }
+
+            userCarRepo.delete(userCar);
+            sb.append("Deleted record: " + userCar.getUser() + " " + userCar.getCar() + "\n");
+        }
+
+        return ResponseEntity.ok(sb);
     }
 }
