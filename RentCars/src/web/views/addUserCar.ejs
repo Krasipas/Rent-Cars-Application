@@ -16,11 +16,13 @@
             <div class="container-md">
                 <div class="main_content_inner">
 
-                    Add city
+                    Rent a car
 
-                    <form class="form-inline my-2 my-lg-0" action="http://localhost:8080/city/insert" method="post">
+                    <form class="form-inline my-2 my-lg-0" action="/rent/add" method="post" accept-charset="utf-8">
                         
-                        <input class="form-control mr-sm-2" type="text" name="name" placeholder="Name">
+                        <input class="form-control mr-sm-2" type="text" name="userNum" placeholder="User number">
+                        <input class="form-control mr-sm-2" type="text" name="carNum" placeholder="Car number">
+                        <input class="form-control mr-sm-2" type="number" name="daysToBeUsed" placeholder="Duration (days)">
 
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add</button>
                     </form>
