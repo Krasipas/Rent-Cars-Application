@@ -55,13 +55,13 @@ public class UserCarController {
         Calendar calendar = Calendar.getInstance();
 
         if(user == null){
-            return ResponseEntity.ok(user.getFullName() + " is not registered!");
+            return ResponseEntity.ok(rentRequest.getUserNum() + " is not registered!");
         }
 
         if(selectedCar == null){
             return ResponseEntity.ok(
                     "Car with registration number " +
-                    selectedCar.getRegistrationNum() +
+                    rentRequest.getCarNum() +
                     " is not registered!");
         }
 
