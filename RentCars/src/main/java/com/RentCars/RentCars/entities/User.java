@@ -28,7 +28,7 @@ public class User {
     @NotNull
     private String num;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "city_id")
     @JsonBackReference
     private City city;

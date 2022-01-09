@@ -1,8 +1,10 @@
 package com.RentCars.RentCars.controllers;
 
+import com.RentCars.RentCars.entities.City;
 import com.RentCars.RentCars.entities.User;
 import com.RentCars.RentCars.payload.request.UserRequest;
 import com.RentCars.RentCars.payload.response.UserResponse;
+import com.RentCars.RentCars.repositories.CityRepository;
 import com.RentCars.RentCars.repositories.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,9 +22,11 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
     private final UserRepository userRepo;
+    private final CityRepository cityRepo;
 
-    public UserController(UserRepository userRepo) {
+    public UserController(UserRepository userRepo, CityRepository cityRepo) {
         this.userRepo = userRepo;
+        this.cityRepo = cityRepo;
     }
 
     @GetMapping("/fetch")
@@ -80,19 +84,23 @@ public class UserController {
     @PostMapping("/save")
     public ResponseEntity<?> persistUser(@RequestBody UserRequest userRequest){
         List<User> users = userRepo.findByFirstNameAndLastName(userRequest.getFirstName(), userRequest.getLastName());
+
+        City selectedCity = cityRepo.findCityByName(userRequest.getCity());
+
         if(users.isEmpty()) {
             userRepo.save(new User(
                     userRequest.getFirstName(),
                     userRequest.getLastName(),
                     userRequest.getNum(),
-                    userRequest.getCity(),
+                    selectedCity,
                     userRequest.isManager(),
                     userRequest.getBirthDate()));
             return ResponseEntity.ok("User is added!");
         }
+
         for(User user: users){
             user.setNum(userRequest.getNum());
-            user.setCity(userRequest.getCity());
+            user.setCity(selectedCity);
             user.setBirthDate(userRequest.getBirthDate());
             user.setManager(userRequest.isManager());
             userRepo.save(user);
