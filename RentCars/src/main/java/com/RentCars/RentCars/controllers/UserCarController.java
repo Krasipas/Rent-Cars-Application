@@ -92,7 +92,7 @@ public class UserCarController {
                         " rented" + savedUserCar.getCar().getBrandAndModel() +
                         " with registration number " + savedUserCar.getCar().getRegistrationNum() +
                         " for" + rentRequest.getDaysToBeUsed() +
-                        "!" +
+                        " days!" +
                         " Expire date: " +
                         savedUserCar.getFinishDate());
 
