@@ -109,12 +109,12 @@ public class UserCarController {
             if(isCarBeingUsed){
                 sb.append("Car with registration number " +
                         userCar.getCar().getRegistrationNum() +
-                        " is being used by " + userCar.getUser().getFullName());
+                        " is being used by " + userCar.getUser().getFullName() + "\n");
                 continue;
             }
 
             userCarRepo.delete(userCar);
-            sb.append("Deleted record: " + userCar.getUser() + " " + userCar.getCar() + "\n");
+            sb.append("Deleted record: " + userCar.getUser().getFullName() + " with car number: " + userCar.getCar().getRegistrationNum() + "\n");
         }
 
         return ResponseEntity.ok(sb);
